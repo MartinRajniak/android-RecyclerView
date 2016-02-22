@@ -24,7 +24,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
 
 /**
  * Demonstrates the use of {@link RecyclerView} with a {@link LinearLayoutManager} and a
@@ -43,9 +42,6 @@ public class RecyclerViewFragment extends Fragment {
     }
 
     protected LayoutManagerType mCurrentLayoutManagerType;
-
-    protected RadioButton mLinearLayoutRadioButton;
-    protected RadioButton mGridLayoutRadioButton;
 
     protected RecyclerView mRecyclerView;
     protected CustomAdapter mAdapter;
@@ -75,35 +71,12 @@ public class RecyclerViewFragment extends Fragment {
         // elements are laid out.
         mLayoutManager = new LinearLayoutManager(getActivity());
 
-        mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
-
-        if (savedInstanceState != null) {
-            // Restore saved layout manager type.
-            mCurrentLayoutManagerType = (LayoutManagerType) savedInstanceState
-                    .getSerializable(KEY_LAYOUT_MANAGER);
-        }
-        setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
+        setRecyclerViewLayoutManager(LayoutManagerType.GRID_LAYOUT_MANAGER);
 
         mAdapter = new CustomAdapter(mDataset);
         // Set CustomAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
-
-        mLinearLayoutRadioButton = (RadioButton) rootView.findViewById(R.id.linear_layout_rb);
-        mLinearLayoutRadioButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setRecyclerViewLayoutManager(LayoutManagerType.LINEAR_LAYOUT_MANAGER);
-            }
-        });
-
-        mGridLayoutRadioButton = (RadioButton) rootView.findViewById(R.id.grid_layout_rb);
-        mGridLayoutRadioButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setRecyclerViewLayoutManager(LayoutManagerType.GRID_LAYOUT_MANAGER);
-            }
-        });
 
         return rootView;
     }
